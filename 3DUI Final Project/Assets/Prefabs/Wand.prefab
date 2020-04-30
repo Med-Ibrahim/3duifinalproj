@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 2774136756868402269}
   - component: {fileID: 3787749362061611415}
   - component: {fileID: 3239217345380564708}
+  - component: {fileID: 2888944690155481531}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -187,6 +188,36 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2888944690155481531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301453165209757386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0411477ab2afbb4f9553d36156447a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confirmBtn: {fileID: 0}
+  pointerLine: {fileID: 7561591778064447852}
+  deselectBtn: {fileID: 0}
+  translateBtn: {fileID: 0}
+  stopTranslateBtn: {fileID: 0}
+  scaleBtn: {fileID: 0}
+  rotateBtn: {fileID: 0}
+  voodooWall: {fileID: 992799458449038050, guid: 1ac42f84b362ce646b0e0e50bf3b3716,
+    type: 3}
+  wall: {fileID: 0}
+  imageTarget: {fileID: 0}
+  selectingPanel: {fileID: 0}
+  translatingPanel: {fileID: 0}
+  rotatingingPanel: {fileID: 0}
+  scalingPanel: {fileID: 0}
+  transformsPanel: {fileID: 0}
+  translucent: {fileID: 2100000, guid: c89237a8ba617ea4b9cb413b1f74a127, type: 2}
+  silhouette: {fileID: 2100000, guid: a6a8ebf720e8ec34caf663b86953a6d9, type: 2}
 --- !u!1 &687080272534793314
 GameObject:
   m_ObjectHideFlags: 0

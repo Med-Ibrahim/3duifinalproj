@@ -27,6 +27,7 @@ public class Wand : MonoBehaviour
     //public GameObject resetPanel;
     public Material translucent;
     public Material silhouette;
+    public Material voodooMaterial;
     public const float SCALE_FACTOR = 1.50f; //? Wanted to add sensitivity slider, but unnecessary. also public const dont work like that lmao
 
     //Initialize some defaults and variables to be used later
@@ -138,7 +139,8 @@ public class Wand : MonoBehaviour
 
     void OnTriggerEnter(Collider other) //Might need to copy into OnTriggerStay as well. If deselected while wand is in other object, will need to move hand then re-enter into object to confirm selection
     {
-        if (controlStyle == "hand" && currentHover == null && other.gameObject.layer == LayerMask.NameToLayer("Player"))    //bug here, after selecting object, if contact is made it will turn yellow
+        Debug.Log("YO");
+        if (controlStyle == "hand" && currentHover == null && other.gameObject.layer == LayerMask.NameToLayer("Furniture"))    //bug here, after selecting object, if contact is made it will turn yellow
         {
             //Display yellow outline indicating hover for selection
             foreach (Renderer rend in other.GetComponentsInChildren<Renderer>())
@@ -152,10 +154,15 @@ public class Wand : MonoBehaviour
         }
     }
 
+    void OnTriggerStay(Collider other)
+    {
+        Debug.Log("yo");
+    }
+
     void OnTriggerExit(Collider other)
     {
         //Stop highlighting the SELECTABLE object being hovered, unless that object is what we have currently selected.
-        if (controlStyle == "hand" && currentSelected != other.gameObject && other.gameObject.layer == LayerMask.NameToLayer("Player")) //Might be too many conditions...First condition is bc if you are using pointer style and come in contact with object, can still deselect it
+        if (controlStyle == "hand" && currentSelected != other.gameObject && other.gameObject.layer == LayerMask.NameToLayer("Furniture")) //Might be too many conditions...First condition is bc if you are using pointer style and come in contact with object, can still deselect it
         {
             //Remove yellow outline, no longer hovering
             foreach (Renderer rend in other.GetComponentsInChildren<Renderer>())
@@ -208,16 +215,8 @@ public class Wand : MonoBehaviour
             }
             confirmBtn.SetActive(false);
             SwitchPanel(transformsPanel);
-            if (currentSelected.CompareTag("Tower")) //Because you can only rotate tower, hide the other options. Re-enable when a wall is selected
-            {
-                translateBtn.SetActive(false);
-                scaleBtn.SetActive(false);
-            }
-            else
-            {
-                translateBtn.SetActive(true);
-                scaleBtn.SetActive(true);
-            }
+            translateBtn.SetActive(true);
+            scaleBtn.SetActive(true);
         }
     }
 
@@ -304,7 +303,8 @@ public class Wand : MonoBehaviour
         if (controlStyle == "pointer")
         {
             Vector3 offset = (currentSelected.transform.position - transform.position).normalized;
-            currentVoodoo = Instantiate(voodooWall, transform.position+offset, currentSelected.transform.rotation, imageTarget.transform);
+            currentVoodoo = Instantiate(wall, transform.position+offset, currentSelected.transform.rotation);
+            currentVoodoo.GetComponent<Renderer>().material = voodooMaterial;
         }
         pointerLine.SetActive(false);
         ManipulateWall(true, currentSelected);
@@ -339,7 +339,8 @@ public class Wand : MonoBehaviour
     public void CreateWall()
     {
         if (controlStyle == "hand")
-            Instantiate(wall, transform.position,new Quaternion(0,0,0,1),imageTarget.transform); //This is with virtual hand, need pointer
+            //Instantiate(wall, transform.position,new Quaternion(0,0,0,1),imageTarget.transform); //This is with virtual hand, need pointer
+            Instantiate(wall, transform.position, new Quaternion(0, 0, 0, 1));
         else
         {
             int layerMask = 1 << 9;
