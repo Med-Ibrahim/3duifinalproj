@@ -3,7 +3,27 @@ guid: a0411477ab2afbb4f9553d36156447a1
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - confirmBtn: {instanceID: 0}
+  - pointerLine: {instanceID: 0}
+  - deselectBtn: {instanceID: 0}
+  - translateBtn: {instanceID: 0}
+  - stopTranslateBtn: {instanceID: 0}
+  - scaleBtn: {instanceID: 0}
+  - rotateBtn: {instanceID: 0}
+  - turret: {instanceID: 0}
+  - voodooTower: {instanceID: 0}
+  - voodooWall: {instanceID: 0}
+  - wall: {instanceID: 0}
+  - imageTarget: {instanceID: 0}
+  - selectingPanel: {instanceID: 0}
+  - translatingPanel: {instanceID: 0}
+  - rotatingingPanel: {instanceID: 0}
+  - scalingPanel: {instanceID: 0}
+  - transformsPanel: {instanceID: 0}
+  - resetPanel: {instanceID: 0}
+  - translucent: {instanceID: 0}
+  - silhouette: {fileID: 2100000, guid: a6a8ebf720e8ec34caf663b86953a6d9, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

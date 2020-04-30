@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
+//Final proj
 public class Wand : MonoBehaviour
 {
     public GameObject confirmBtn;
