@@ -14,17 +14,17 @@ public class Wand : MonoBehaviour
     public GameObject stopTranslateBtn;
     public GameObject scaleBtn;
     public GameObject rotateBtn;
-    public GameObject turret;
-    public GameObject voodooTower;  //Might be able to just instantiate the regular prefab and modify the material, but seems like more work
+    //public GameObject turret;
+    //public GameObject voodooTower;  //Might be able to just instantiate the regular prefab and modify the material, but seems like more work
     public GameObject voodooWall;
-    public GameObject wall;
+    public GameObject wall; //Should be replaced by the current selected furniture object
     public GameObject imageTarget;
     public GameObject selectingPanel;
     public GameObject translatingPanel;
     public GameObject rotatingingPanel;
     public GameObject scalingPanel;
     public GameObject transformsPanel; //Possibly add panel for not selecting? Default panel of (Select Object[, select world?][end game?][controls?])
-    public GameObject resetPanel;
+    //public GameObject resetPanel;
     public Material translucent;
     public Material silhouette;
     public const float SCALE_FACTOR = 1.50f; //? Wanted to add sensitivity slider, but unnecessary. also public const dont work like that lmao
@@ -77,20 +77,9 @@ public class Wand : MonoBehaviour
             }
             else if (transformationState == "rotating")
             {
-                //Create voodooTurret, rotate it, apply that rotation to real turret. Else if rotating a wall, do the same but easier.
-                if (currentSelected.CompareTag("Tower"))
-                {
-                    Transform voodooTurret = currentVoodoo.transform.GetChild(1);
-                    voodooTurret.transform.LookAt(transform.position);
-                    voodooTurret.transform.Rotate(new Vector3(90f, 0f, 0f));
-                    turret.transform.rotation = voodooTurret.transform.rotation;
-                }
-                else
-                {
-                    currentVoodoo.transform.LookAt(transform.position);
-                    currentSelected.transform.rotation = currentVoodoo.transform.rotation;
-
-                }
+                //Create voodoo wall, apply rotation, then apply rotation to actual wall
+                currentVoodoo.transform.LookAt(transform.position);
+                currentSelected.transform.rotation = currentVoodoo.transform.rotation;
             }
             else if (transformationState == "translating")
             {
@@ -140,16 +129,7 @@ public class Wand : MonoBehaviour
             }
             else if (transformationState == "rotating")
             {
-
-                if (currentSelected.CompareTag("Tower"))
-                {
-                    turret.transform.LookAt(transform.position);
-                    turret.transform.Rotate(new Vector3(90f, 0f, 0f));
-                }
-                else
-                {
-                    currentSelected.transform.LookAt(transform.position);
-                }
+                currentSelected.transform.LookAt(transform.position);
             }
         }
         //possibly additional state: selected. For when deciding to transform or not
@@ -318,24 +298,13 @@ public class Wand : MonoBehaviour
     public void StartRotating()
     {
         transformationState = "rotating";
-        if (currentSelected.CompareTag("Tower"))    //Is this too hardcoded/switch case like? Feels like this is all one massive switch case haha
-            originalRotation = turret.transform.localRotation;
-        else
-            originalRotation = currentSelected.transform.localRotation;
+        originalRotation = currentSelected.transform.localRotation;
 
         SwitchPanel(rotatingingPanel);
         if (controlStyle == "pointer")
         {
             Vector3 offset = (currentSelected.transform.position - transform.position).normalized;
-            if (currentSelected.CompareTag("Tower"))
-            {
-                currentVoodoo = Instantiate(voodooTower, transform.position+offset, currentSelected.transform.rotation, imageTarget.transform);
-
-            }
-            else
-            {
-                currentVoodoo = Instantiate(voodooWall, transform.position+offset, currentSelected.transform.rotation, imageTarget.transform);
-            }
+            currentVoodoo = Instantiate(voodooWall, transform.position+offset, currentSelected.transform.rotation, imageTarget.transform);
         }
         pointerLine.SetActive(false);
         ManipulateWall(true, currentSelected);
@@ -357,10 +326,7 @@ public class Wand : MonoBehaviour
     public void CancelRotation()
     {
         transformationState = "selecting";
-        if (currentSelected.CompareTag("Tower"))
-            turret.transform.localRotation = originalRotation;
-        else
-            currentSelected.transform.localRotation = originalRotation;
+        currentSelected.transform.localRotation = originalRotation;
         SwitchPanel(transformsPanel);
         if (currentVoodoo != null)
             Destroy(currentVoodoo);
@@ -390,17 +356,10 @@ public class Wand : MonoBehaviour
 
     public void ResetObject()
     {
-        if (currentSelected.CompareTag("Wall"))
-        {
-            currentSelected.transform.localEulerAngles = new Vector3(0, 0, 0);
-            currentSelected.transform.localScale = wall.transform.GetChild(0).localScale;
-            Vector3 currPos = currentSelected.transform.position;
-            currentSelected.transform.position = new Vector3(currPos.x, 3/*wall.transform.localScale.y / 2*/, currPos.z);
-        }
-        else
-        {
-            turret.transform.localEulerAngles = new Vector3(45, 0, 0);
-        }
+        currentSelected.transform.localEulerAngles = new Vector3(0, 0, 0);
+        currentSelected.transform.localScale = wall.transform.GetChild(0).localScale;
+        Vector3 currPos = currentSelected.transform.position;
+        currentSelected.transform.position = new Vector3(currPos.x, 3/*wall.transform.localScale.y / 2*/, currPos.z);
     }
 
     //Reload game
