@@ -12,6 +12,14 @@
         "source": "C:\\Users\\denni\\Documents\\GitHub\\3duifinalproj\\3DUI Final Project\\Temp\\gradleOut\\launcher\\src\\main\\res\\mipmap-mdpi\\ic_launcher_foreground.png"
     },
     {
+        "merged": "C:\\Users\\denni\\Documents\\GitHub\\3duifinalproj\\3DUI Final Project\\Temp\\gradleOut\\launcher\\build\\intermediates\\res\\merged\\release\\raw_keep.xml.flat",
+        "source": "C:\\Users\\denni\\.gradle\\caches\\transforms-2\\files-2.1\\a7b197cf56b01b5e71166cf6478f3441\\res\\raw\\keep.xml"
+    },
+    {
+        "merged": "C:\\Users\\denni\\Documents\\GitHub\\3duifinalproj\\3DUI Final Project\\Temp\\gradleOut\\launcher\\build\\intermediates\\res\\merged\\release\\layout___arcore_education.xml.flat",
+        "source": "C:\\Users\\denni\\.gradle\\caches\\transforms-2\\files-2.1\\a7b197cf56b01b5e71166cf6478f3441\\res\\layout\\__arcore_education.xml"
+    },
+    {
         "merged": "C:\\Users\\denni\\Documents\\GitHub\\3duifinalproj\\3DUI Final Project\\Temp\\gradleOut\\launcher\\build\\intermediates\\res\\merged\\release\\mipmap-mdpi_ic_launcher_background.png.flat",
         "source": "C:\\Users\\denni\\Documents\\GitHub\\3duifinalproj\\3DUI Final Project\\Temp\\gradleOut\\launcher\\src\\main\\res\\mipmap-mdpi\\ic_launcher_background.png"
     },

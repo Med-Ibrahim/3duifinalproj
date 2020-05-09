@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class Furniture : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private bool selected;
+    private Material mat;
+
+    public void Select(bool b)
     {
-        
+        selected = b;
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool IsSelected()
     {
-        
+        return selected;
+    }
+
+    public Material GetMaterial()
+    {
+        return mat;
+    }
+
+    public void SetMaterial(Material newMaterial)
+    {
+        mat = newMaterial;
     }
 }

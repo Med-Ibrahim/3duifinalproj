@@ -4,7 +4,8 @@ ADDED from C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp
 INJECTED from C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\launcher\src\main\AndroidManifest.xml:3:1-6:12
 INJECTED from C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\launcher\src\main\AndroidManifest.xml:3:1-6:12
 INJECTED from C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\launcher\src\main\AndroidManifest.xml:3:1-6:12
-MERGED from [:unityLibrary] C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\unityLibrary\build\intermediates\library_manifest\release\AndroidManifest.xml:3:1-75:12
+MERGED from [:unityLibrary] C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\unityLibrary\build\intermediates\library_manifest\release\AndroidManifest.xml:3:1-78:12
+MERGED from [com.google.ar:core:1.10.0] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\a7b197cf56b01b5e71166cf6478f3441\AndroidManifest.xml:17:1-46:12
 MERGED from [:VuforiaWrapper:] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\261621e03debb35cde4c1c09eb1d9f47\AndroidManifest.xml:2:1-15:12
 INJECTED from C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\launcher\src\main\AndroidManifest.xml:3:1-6:12
 INJECTED from C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\launcher\src\main\AndroidManifest.xml:3:1-6:12
@@ -41,8 +42,10 @@ ADDED from C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp
 		ADDED from C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\launcher\src\main\AndroidManifest.xml:4:135-160
 application
 ADDED from C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\launcher\src\main\AndroidManifest.xml:5:3-83
-MERGED from [:unityLibrary] C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\unityLibrary\build\intermediates\library_manifest\release\AndroidManifest.xml:39:5-73:19
-MERGED from [:unityLibrary] C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\unityLibrary\build\intermediates\library_manifest\release\AndroidManifest.xml:39:5-73:19
+MERGED from [:unityLibrary] C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\unityLibrary\build\intermediates\library_manifest\release\AndroidManifest.xml:39:5-76:19
+MERGED from [:unityLibrary] C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\unityLibrary\build\intermediates\library_manifest\release\AndroidManifest.xml:39:5-76:19
+MERGED from [com.google.ar:core:1.10.0] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\a7b197cf56b01b5e71166cf6478f3441\AndroidManifest.xml:30:5-44:19
+MERGED from [com.google.ar:core:1.10.0] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\a7b197cf56b01b5e71166cf6478f3441\AndroidManifest.xml:30:5-44:19
 	android:label
 		ADDED from C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\launcher\src\main\AndroidManifest.xml:5:16-48
 	android:icon
@@ -53,6 +56,8 @@ INJECTED from C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\T
 INJECTED from C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\launcher\src\main\AndroidManifest.xml
 MERGED from [:unityLibrary] C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\unityLibrary\build\intermediates\library_manifest\release\AndroidManifest.xml:9:5-11:41
 MERGED from [:unityLibrary] C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\unityLibrary\build\intermediates\library_manifest\release\AndroidManifest.xml:9:5-11:41
+MERGED from [com.google.ar:core:1.10.0] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\a7b197cf56b01b5e71166cf6478f3441\AndroidManifest.xml:26:5-28:41
+MERGED from [com.google.ar:core:1.10.0] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\a7b197cf56b01b5e71166cf6478f3441\AndroidManifest.xml:26:5-28:41
 MERGED from [:VuforiaWrapper:] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\261621e03debb35cde4c1c09eb1d9f47\AndroidManifest.xml:7:5-44
 MERGED from [:VuforiaWrapper:] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\261621e03debb35cde4c1c09eb1d9f47\AndroidManifest.xml:7:5-44
 INJECTED from C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\launcher\src\main\AndroidManifest.xml
@@ -180,6 +185,32 @@ ADDED from [:unityLibrary] C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Fi
 		ADDED from [:unityLibrary] C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\unityLibrary\build\intermediates\library_manifest\release\AndroidManifest.xml:72:13-65
 	android:name
 		ADDED from [:unityLibrary] C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\unityLibrary\build\intermediates\library_manifest\release\AndroidManifest.xml:71:13-42
+meta-data#com.google.ar.core
+ADDED from [:unityLibrary] C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\unityLibrary\build\intermediates\library_manifest\release\AndroidManifest.xml:73:9-75:40
+	android:value
+		ADDED from [:unityLibrary] C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\unityLibrary\build\intermediates\library_manifest\release\AndroidManifest.xml:75:13-37
+	android:name
+		ADDED from [:unityLibrary] C:\Users\denni\Documents\GitHub\3duifinalproj\3DUI Final Project\Temp\gradleOut\unityLibrary\build\intermediates\library_manifest\release\AndroidManifest.xml:74:13-46
+meta-data#com.google.ar.core.min_apk_version
+ADDED from [com.google.ar:core:1.10.0] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\a7b197cf56b01b5e71166cf6478f3441\AndroidManifest.xml:33:9-35:41
+	android:value
+		ADDED from [com.google.ar:core:1.10.0] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\a7b197cf56b01b5e71166cf6478f3441\AndroidManifest.xml:35:13-38
+	android:name
+		ADDED from [com.google.ar:core:1.10.0] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\a7b197cf56b01b5e71166cf6478f3441\AndroidManifest.xml:34:13-62
+activity#com.google.ar.core.InstallActivity
+ADDED from [com.google.ar:core:1.10.0] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\a7b197cf56b01b5e71166cf6478f3441\AndroidManifest.xml:37:9-43:80
+	android:excludeFromRecents
+		ADDED from [com.google.ar:core:1.10.0] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\a7b197cf56b01b5e71166cf6478f3441\AndroidManifest.xml:40:13-46
+	android:launchMode
+		ADDED from [com.google.ar:core:1.10.0] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\a7b197cf56b01b5e71166cf6478f3441\AndroidManifest.xml:42:13-43
+	android:exported
+		ADDED from [com.google.ar:core:1.10.0] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\a7b197cf56b01b5e71166cf6478f3441\AndroidManifest.xml:41:13-37
+	android:configChanges
+		ADDED from [com.google.ar:core:1.10.0] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\a7b197cf56b01b5e71166cf6478f3441\AndroidManifest.xml:39:13-74
+	android:theme
+		ADDED from [com.google.ar:core:1.10.0] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\a7b197cf56b01b5e71166cf6478f3441\AndroidManifest.xml:43:13-77
+	android:name
+		ADDED from [com.google.ar:core:1.10.0] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\a7b197cf56b01b5e71166cf6478f3441\AndroidManifest.xml:38:13-62
 uses-permission#android.permission.INTERNET
 ADDED from [:VuforiaWrapper:] C:\Users\denni\.gradle\caches\transforms-2\files-2.1\261621e03debb35cde4c1c09eb1d9f47\AndroidManifest.xml:11:5-67
 	android:name

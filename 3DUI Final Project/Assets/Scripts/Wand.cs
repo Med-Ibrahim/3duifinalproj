@@ -250,15 +250,27 @@ public class Wand : MonoBehaviour
 
     //Deselect currently selected object. Update silhouette/UI
     public void CancelSelection()
-    {
-        if (currentSelected)
+    {   
+        if (selectedArr.Count > 0)
+        {
+            foreach (GameObject obj in selectedArr)
+            {
+                foreach (Renderer rend in obj.GetComponentsInChildren<Renderer>())
+                {
+                    SetSilhouette(rend, 0f, Color.yellow);
+                }
+                //currentSelected = null;
+            }
+            selectedArr.Clear();
+        }
+        /*if (currentSelected)
         {
             foreach (Renderer rend in currentSelected.GetComponentsInChildren<Renderer>())
             {
                 SetSilhouette(rend, 0f, Color.yellow);
             }
             currentSelected = null;
-        }
+        }*/
         SwitchPanel(selectingPanel);
     }
 
