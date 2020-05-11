@@ -18,7 +18,7 @@ public class Wand : MonoBehaviour
     public GameObject voodooWall;
     public GameObject furniturePiece; //Should be replaced by the current selected furniture object
     public GameObject imageTarget;
-    public GameObject selectingPanel;
+    public GameObject defaultPanel;
     public GameObject translatingPanel;
     public GameObject rotatingPanel;
     public GameObject scalingPanel;
@@ -53,12 +53,10 @@ public class Wand : MonoBehaviour
     private int furnitureCount;
     private GameObject currentVoodoo;
     private const float MINI_SCALE = 10f;
-    
-
 
     void Start()
     {
-        currentPanel = selectingPanel;
+        currentPanel = defaultPanel;
     }
 
     void Update()
@@ -304,7 +302,7 @@ public class Wand : MonoBehaviour
             }
             currentSelected = null;
         }*/
-        SwitchPanel(selectingPanel);
+        SwitchPanel(defaultPanel);
     }
 
     //Change transformation state, store original position of object incase the user decides to cancel translation, and change wall appearance/tangibility.
@@ -315,13 +313,7 @@ public class Wand : MonoBehaviour
         if (selectedArr.Count > 0)
         {
             groupParent = new GameObject();
-            Vector3 center = new Vector3(0, 0, 0);
-            foreach (GameObject obj in selectedArr)
-            {
-                center += obj.transform.position;
-            }
-            center /= selectedArr.Count;
-
+            Vector3 center = FindGroupCenter(selectedArr);
             groupParent.transform.position = center;
             foreach (GameObject obj in selectedArr)
             {
@@ -504,12 +496,7 @@ public class Wand : MonoBehaviour
     public void CreateWIM()
     {
         GameObject wimParent = new GameObject();
-        Vector3 center = new Vector3(0, 0, 0);
-        foreach (GameObject obj in furnitureList)
-        {
-            center += obj.transform.position;
-        }
-        center /= furnitureList.Count;
+        Vector3 center = FindGroupCenter(furnitureList);
 
         wimParent.transform.position = center;
         foreach (GameObject obj in furnitureList)
@@ -521,5 +508,14 @@ public class Wand : MonoBehaviour
 
     }
 
-
+    private Vector3 FindGroupCenter(List<GameObject> gameObjectList)
+    {
+        Vector3 center = new Vector3(0, 0, 0);
+        foreach (GameObject obj in gameObjectList)
+        {
+            center += obj.transform.position;
+        }
+        center /= gameObjectList.Count;
+        return center;
+    }
 }
