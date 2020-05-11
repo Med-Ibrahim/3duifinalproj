@@ -55,18 +55,6 @@ public class HUD : MonoBehaviour
     
     }
 
-    private void SetSilhouette(Renderer rend, float lineWidth)  //Can probably abstract a ~little~ more, and put the foreach loops into this function
-    {
-        //The shader has up to 2 different silhouette outlines
-        rend.material.SetFloat("_FirstOutlineWidth", lineWidth);
-    }
-
-    private void SetSilhouette(Renderer rend, float lineWidth, Color color)
-    {
-        rend.material.SetFloat("_FirstOutlineWidth", lineWidth);
-        rend.material.SetColor("_FirstOutlineColor", color);
-    }
-
     //Change control mothed between vritual hand and pointer
     public void ChangeStyle()
     {
@@ -268,5 +256,17 @@ public class HUD : MonoBehaviour
         newPanel.SetActive(true);
         currentPanel.SetActive(false);
         currentPanel = newPanel;
+    }
+
+    private void SetSilhouette(Renderer rend, float lineWidth)  //Can probably abstract a ~little~ more, and put the foreach loops into this function
+    {
+        //The shader has up to 2 different silhouette outlines
+        rend.material.SetFloat("_FirstOutlineWidth", lineWidth);
+    }
+
+    private void SetSilhouette(Renderer rend, float lineWidth, Color color)
+    {
+        rend.material.SetFloat("_FirstOutlineWidth", lineWidth);
+        rend.material.SetColor("_FirstOutlineColor", color);
     }
 }

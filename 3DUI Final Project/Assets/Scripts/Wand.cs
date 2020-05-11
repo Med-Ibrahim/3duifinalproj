@@ -11,32 +11,35 @@ public class Wand : MonoBehaviour
     public GameObject pointerLine;
     public GameObject deselectBtn;
     public GameObject translateBtn; //Can prob get rid of all of these buttons (except confirmbtn i think)
-    public GameObject stopTranslateBtn;
     public GameObject scaleBtn;
     public GameObject rotateBtn;
     //public GameObject turret;
     //public GameObject voodooTower;  //Might be able to just instantiate the regular prefab and modify the material, but seems like more work
     public GameObject voodooWall;
-    public GameObject wall; //Should be replaced by the current selected furniture object
+    public GameObject furniturePiece; //Should be replaced by the current selected furniture object
     public GameObject imageTarget;
     public GameObject selectingPanel;
     public GameObject translatingPanel;
-    public GameObject rotatingingPanel;
+    public GameObject rotatingPanel;
     public GameObject scalingPanel;
     public GameObject transformsPanel; //Possibly add panel for not selecting? Default panel of (Select Object[, select world?][end game?][controls?])
-    //public GameObject resetPanel;
     public Material translucent;
     public Material silhouette;
     public Material voodooMaterial;
     public const float SCALE_FACTOR = 1.50f; //? Wanted to add sensitivity slider, but unnecessary. also public const dont work like that lmao
     public GameObject HUD;
+    public GameObject WiM;
+    public GameObject groundPlane;
+
+    public GameObject furnitureMenu;
+    public Text menuText;
 
     //Initialize some defaults and variables to be used later
     private GameObject currentPanel;
     private GameObject currentHover = null;
     private GameObject currentSelected = null;
     private List<GameObject> selectedArr = new List<GameObject>();
-    private List<GameObject> furniture = new List<GameObject>();
+    private List<GameObject> furnitureList = new List<GameObject>();
     private Vector3 groupMidpoint;
     private GameObject groupParent = null;
 
@@ -47,8 +50,9 @@ public class Wand : MonoBehaviour
     private Vector3 originalScale;
     private Vector3 originalPosition;
     private Quaternion originalRotation;
-    private int wallCount;
+    private int furnitureCount;
     private GameObject currentVoodoo;
+    private const float MINI_SCALE = 10f;
     
 
 
@@ -64,7 +68,7 @@ public class Wand : MonoBehaviour
             // bit shift to create layer mask
             if (transformationState == "selecting")
             {
-                //Walls and tower on layer 8
+                //Funiture on layer 8
                 int layerMask = 1 << 8;
 
                 RaycastHit hit;
@@ -87,7 +91,7 @@ public class Wand : MonoBehaviour
                     confirmBtn.SetActive(false);
                 }
             }
-            else if (transformationState == "rotating")
+            else if (transformationState == "rotating") //TODO Update rotation, remove voodoo
             {
                 //Create voodoo wall, apply rotation, then apply rotation to actual wall
                 currentVoodoo.transform.LookAt(transform.position);
@@ -125,10 +129,9 @@ public class Wand : MonoBehaviour
         }
         else //Control style: hand
         {
-            if (transformationState == "translating")
+            if (transformationState == "translating") //TODO Update furniture translation, fix group translation. (Currently uses avg position, prefer "median"
             {
-                //Just put wall at wand position
-                
+                //If group is selected, translate according to average of item positions   
                 if (selectedArr.Count > 1)
                 {
                     /*foreach (GameObject obj in selectedArr)
@@ -225,7 +228,7 @@ public class Wand : MonoBehaviour
     }
 
     //Confirm the current object being hovered, and select it. Update UI to reflect this change and color silhouette green
-    public void ConfirmSelection()
+    /*public void ConfirmSelection()
     {
         // Make sure something is being hovered
         if (currentHover != null)
@@ -245,6 +248,36 @@ public class Wand : MonoBehaviour
                 scaleBtn.SetActive(true);
             }
             
+        }
+    }*/
+
+    public void ConfirmSelection()
+    {
+        // Make sure something is being hovered
+        if (currentHover != null)
+        {
+            if (currentHover.CompareTag("menu"))
+            {
+                GameObject newHover = Instantiate(currentHover);
+                newHover.tag = "Untagged";
+                newHover.transform.Translate(currentHover.transform.position);
+                currentSelected = newHover;
+                furnitureMenu.SetActive(false);
+                menuText.text = "Show Furniture Menu";
+            }
+            else
+            {
+                currentSelected = currentHover;
+            }
+
+            foreach (Renderer rend in currentSelected.GetComponentsInChildren<Renderer>())
+            {
+                SetSilhouette(rend, 2f, Color.green);
+            }
+            confirmBtn.SetActive(false);
+            SwitchPanel(transformsPanel);
+            translateBtn.SetActive(true);
+            scaleBtn.SetActive(true);
         }
     }
 
@@ -293,7 +326,7 @@ public class Wand : MonoBehaviour
             foreach (GameObject obj in selectedArr)
             {
                 obj.transform.SetParent(groupParent.transform);
-                ManipulateWall(true, obj);
+                ManipulateFurniture(true, obj);
             }
         }
         SwitchPanel(translatingPanel);
@@ -306,7 +339,7 @@ public class Wand : MonoBehaviour
         transformationState = "selecting";
         SwitchPanel(transformsPanel);
         foreach (GameObject obj in selectedArr)
-            ManipulateWall(false, obj);
+            ManipulateFurniture(false, obj);
     }
 
     //Return object to original position, change state, update UI, make wall tangible.
@@ -316,7 +349,7 @@ public class Wand : MonoBehaviour
         currentSelected.transform.position = originalPosition;
         SwitchPanel(transformsPanel);
         foreach (GameObject obj in selectedArr)
-            ManipulateWall(false, currentSelected);
+            ManipulateFurniture(false, currentSelected);
     }
 
     //Change state, store original scale, update UI, make wall intangible
@@ -327,7 +360,7 @@ public class Wand : MonoBehaviour
         originalScale = currentSelected.transform.localScale;
         originalPosition = currentSelected.transform.position;
         SwitchPanel(scalingPanel);
-        ManipulateWall(true, currentSelected);
+        ManipulateFurniture(true, currentSelected);
     }
 
     //Change state, update UI, make wall tangible
@@ -335,7 +368,7 @@ public class Wand : MonoBehaviour
     {
         transformationState = "selecting";
         SwitchPanel(transformsPanel);
-        ManipulateWall(false, currentSelected);
+        ManipulateFurniture(false, currentSelected);
     }
 
     //Change state, revert scale, update UI, tangible
@@ -345,7 +378,7 @@ public class Wand : MonoBehaviour
         currentSelected.transform.localScale = originalScale;
         currentSelected.transform.position = originalPosition;
         SwitchPanel(transformsPanel);
-        ManipulateWall(false, currentSelected);
+        ManipulateFurniture(false, currentSelected);
     }
 
     //Change state, store original rotation (different for wall/turret), change UI. Create Voodoo doll instance corresponding to selected object.
@@ -353,15 +386,15 @@ public class Wand : MonoBehaviour
     {
         transformationState = "rotating";
         originalRotation = currentSelected.transform.localRotation;
-        SwitchPanel(rotatingingPanel);
+        SwitchPanel(rotatingPanel);
         if (controlStyle == "pointer")
         {
             Vector3 offset = (currentSelected.transform.position - transform.position).normalized;
-            currentVoodoo = Instantiate(wall, transform.position+offset, currentSelected.transform.rotation);
+            currentVoodoo = Instantiate(furniturePiece, transform.position+offset, currentSelected.transform.rotation);
             currentVoodoo.GetComponent<Renderer>().material = voodooMaterial;
         }
         pointerLine.SetActive(false);
-        ManipulateWall(true, currentSelected);
+        ManipulateFurniture(true, currentSelected);
     }
 
     //Change state, update UI, destroy voodoo if necessary.
@@ -373,7 +406,7 @@ public class Wand : MonoBehaviour
             Destroy(currentVoodoo); //Maybe set currentVoodoo = null
         if(controlStyle == "pointer")
             pointerLine.SetActive(true);
-        ManipulateWall(false, currentSelected);
+        ManipulateFurniture(false, currentSelected);
     }
 
     //Change state, revert rotation, destroy voodoo if necessary
@@ -386,16 +419,16 @@ public class Wand : MonoBehaviour
             Destroy(currentVoodoo);
         if (controlStyle == "pointer")
             pointerLine.SetActive(true);
-        ManipulateWall(false, currentSelected);
+        ManipulateFurniture(false, currentSelected);
     }
 
     //Create new wall instance. If virtual hand, spawn on wand (will fall to ground). If pointer, spawn on ground point being aimed at.
-    public void CreateWall()
+    public void CreateFurniture()
     {
         if (controlStyle == "hand")
         {    //Instantiate(wall, transform.position,new Quaternion(0,0,0,1),imageTarget.transform); //This is with virtual hand, need pointer
-            GameObject newFurniture = Instantiate(wall, transform.position, new Quaternion(0, 0, 0, 1));
-            furniture.Add(newFurniture);
+            GameObject newFurniture = Instantiate(furniturePiece, groundPlane.transform.position, new Quaternion(0, 0, 0, 1), groundPlane.transform);
+            furnitureList.Add(newFurniture);
         }
         else
         {
@@ -404,19 +437,28 @@ public class Wand : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, layerMask)) //If the Raycast hit a selectable object, display hover silhouette
             {
-                Instantiate(wall, hit.point + new Vector3(0f, wall.transform.localScale.y / 2, 0f), new Quaternion(0, 0, 0, 1), imageTarget.transform);
+                Instantiate(furniturePiece, hit.point + new Vector3(0f, furniturePiece.transform.localScale.y / 2, 0f), new Quaternion(0, 0, 0, 1), imageTarget.transform);
             }
         }
         //Should it jump straight to translation so wall can be placed? or just place wherever it is?
         //If jump to translation, might want a panel for wall functions after creating wall or a cancel placement button, since cancel translation would not make sense (in the case of jumping to translation panel)
+        GameObject miniObject = Instantiate(furniturePiece, WiM.transform.position, WiM.transform.rotation, WiM.transform);
+        //Scale down mini
+        miniObject.transform.localScale /= MINI_SCALE;
     }
 
-    public void ResetObject()
+    public void DeleteFurniture()
     {
-        currentSelected.transform.localEulerAngles = new Vector3(0, 0, 0);
-        currentSelected.transform.localScale = wall.transform.GetChild(0).localScale;
-        Vector3 currPos = currentSelected.transform.position;
-        currentSelected.transform.position = new Vector3(currPos.x, currPos.y/*wall.transform.localScale.y / 2*/, currPos.z);
+        if (selectedArr.Count > 0)
+        {
+            foreach (GameObject obj in selectedArr) //Should be Furniture, not GameObject :(
+            {
+                int objID = obj.GetInstanceID();
+                furnitureList.Remove(obj);
+                Destroy(obj);
+            }
+            selectedArr.Clear();
+        }
     }
 
     //Reload game
@@ -426,15 +468,15 @@ public class Wand : MonoBehaviour
     }
 
     //Change wall state. If being manipulated, it is translucent and intangible. Otherwise, selectable and tangible.
-    private void ManipulateWall(bool manipulating, GameObject wall)
+    private void ManipulateFurniture(bool manipulating, GameObject furn)
     {
-        foreach (Collider col in wall.GetComponentsInChildren<Collider>())
+        foreach (Collider col in furn.GetComponentsInChildren<Collider>())
         {
             col.enabled = !manipulating;
         }
         //Renderer rend = wall.GetComponentInChildren<Renderer>();
-        wall.GetComponentInChildren<Rigidbody>().isKinematic = manipulating;
-        foreach (Renderer rend in wall.GetComponentsInChildren<Renderer>())
+        furn.GetComponentInChildren<Rigidbody>().isKinematic = manipulating;
+        foreach (Renderer rend in furn.GetComponentsInChildren<Renderer>())
         {
             if (manipulating)
                 rend.material = translucent;
@@ -463,14 +505,14 @@ public class Wand : MonoBehaviour
     {
         GameObject wimParent = new GameObject();
         Vector3 center = new Vector3(0, 0, 0);
-        foreach (GameObject obj in furniture)
+        foreach (GameObject obj in furnitureList)
         {
             center += obj.transform.position;
         }
-        center /= furniture.Count;
+        center /= furnitureList.Count;
 
         wimParent.transform.position = center;
-        foreach (GameObject obj in furniture)
+        foreach (GameObject obj in furnitureList)
         {
             GameObject clone = Instantiate(obj, wimParent.transform);
             clone.transform.localScale /= 3.0f;
@@ -478,4 +520,6 @@ public class Wand : MonoBehaviour
         wimParent.transform.position = transform.position;
 
     }
+
+
 }

@@ -17,8 +17,8 @@ MonoBehaviour:
     ufoLicenseKey: QVlwcHRxZi8vLy8vQUFBQUtIaXo1U1dlV2s1bmwzZjlmUGRyM0ppWUh2aW1XL1JMQm5XWnprMGFsV0FQbUowbmE2dThNRXNGcDBGb0pOdjA2SzBEelVudEtUZ3ZMQ1FXbGd3ajRNdGtldmhldkF0cS90VCsrQ0pvS2RDUzUxQlpDdndPSWJma05UN2c3OWExYXMzblRDaHlib0J1L1cvVHlGUnVLaE9CMnNEUW05WXNWdmN1bUZLZXEvcW1SSCtrRWc1M1l1SGNrRXVRbWNsd21tMU5KK09nWHBkSzRqMlFpeUgwUVpGZDBGS0doaVBsQTZvWDVsc0RwQVpmM2JVNStsVXJlTUp0U2lYc24welVHbksvc201Z3FmTktiRzdHc2hEWnVpMTFKQ1BET0tvM3NVNFN6VlgzME9nYU4rYzZJQWZPTXpjWGhNeWY3Sm1hQW1scXFTMVhwZGtPb2JSR1czWnB3Ulg4MFJsclhpYTZMZmdBQW5MbDIvZk8=
     delayedInitialization: 0
     cameraDeviceModeSetting: -1
-    maxSimultaneousImageTargets: 1
-    maxSimultaneousObjectTargets: 1
+    maxSimultaneousImageTargets: 4
+    maxSimultaneousObjectTargets: 4
     virtualSceneScaleFactor: 1
     useDelayedLoadingObjectTargets: 0
     modelTargetRecoWhileExtendedTracked: 1
